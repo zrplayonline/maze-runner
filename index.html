@@ -580,5 +580,57 @@ const Game = {
 
 window.onload = () => {};
 </script>
+    <!-- Fullscreen Launcher -->
+<div id="fullscreen-start" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999999;
+">
+    <button onclick="startFullscreen()" style="
+    padding:20px 40px;
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    background:#4ade80;
+    color:#000;
+    ">
+        PLAY FULLSCREEN
+    </button>
+</div>
+
+<script>
+function startFullscreen() {
+    const elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
+
+    document.getElementById("fullscreen-start").style.display = "none";
+}
+
+document.addEventListener("fullscreenchange", () => {
+    const overlay = document.getElementById("fullscreen-start");
+
+    if (!document.fullscreenElement) {
+        overlay.style.display = "flex";
+    } else {
+        overlay.style.display = "none";
+    }
+});
+</script>
 </body>
 </html>
